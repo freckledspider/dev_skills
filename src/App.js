@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Uncontrolled from "./components/Uncontrolled";
 
 export default function App() {
   const [skills, setSkills] = useState([{ skill: "JavaScript", level: 4 }])
@@ -9,6 +10,7 @@ export default function App() {
   })
 
   function addSkill(event) {
+    console.log(event)
     // prevent the refreshing
     event.preventDefault()
     //console.log the form state
@@ -19,18 +21,26 @@ export default function App() {
     newState.push(form)
     // update the state
     setSkills(newState)
+    // reset the form
+    setForm({
+      skill: "",
+      level: "3"
+    })
   }
 
   function handleChange(event){
-    // const newState = {...form} // making a copy of current state
-    // newState[event.target.name] = event.target.value // update the copy
-    // setForm(newState) // make the copy the new state
-
-    setForm({...form, [event.target.name]: event.target.value}) // alternative way
-   }
+  //  const newState = {...form} // making a copy of current state
+  //  newState[event.target.name] = event.target.value // update the copy
+  //  setForm(newState) // make the copy the new state
+  setForm({
+    ...form, 
+    [event.target.name]: event.target.value
+  })
+  }
 
   return (
     <section>
+      <Uncontrolled/>
       <h2>DEV SKILLS</h2>
       <hr />
       {skills.map((s) => (
